@@ -1,5 +1,5 @@
 const contentEl = document.getElementById('content');
-const navLinks = document.querySelectorAll('nav a');
+const navLinks = document.querySelectorAll('nav a, #siteTitle'); 
 const PAGES_DIR = 'pages'; // 相対パス
 
 async function loadPage(page) {
@@ -53,23 +53,34 @@ navLinks.forEach(link => {
     e.preventDefault();
     const page = link.dataset.page;
     if (!page) return;
-    history.pushState({ page }, '', page); // ルート絶対パスを避ける
+    
+    // 💡 修正点 1: 'home' ページの場合は URL を '/' に設定
+    const path = page === 'home' ? '/' : page; 
+    
+    history.pushState({ page }, '', path); // ルート絶対パスを避ける
     loadPage(page);
   });
 });
 
 // popstate
 window.addEventListener('popstate', e => {
-  const page = e.state?.page || (location.pathname.split('/').pop() || 'home');
+  // 💡 修正点 2: e.state.page がない場合や URL が '/' の場合は 'home' を設定
+  let page;
+  if (e.state?.page) {
+    page = e.state.page;
+  } else {
+    // URL のパス名からページ名を取得。パスが空（ルート '/'）の場合は 'home'
+    page = location.pathname.split('/').pop() || 'home';
+  }
+  
   loadPage(page);
 });
 
 // 初期表示
 (function init() {
-  // URL の最後のパス名を取得
-  let page = location.pathname.split('/').pop();
-  // 空の場合は 'home' をデフォルトに
-  if (!page || page === 'index.html') page = 'home';
+  // 💡 修正点 3: location.pathname が '/' や空の場合は 'home' を使用
+  const path = location.pathname.split('/').pop();
+  let page = (path === '' || path === 'index.html') ? 'home' : path;
+  
   loadPage(page);
 })();
-
