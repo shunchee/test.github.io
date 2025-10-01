@@ -1,0 +1,135 @@
+/* reset.css (Normalize.cssベース + 最新ブラウザ向け調整) */
+
+/* ===========================
+   基本設定
+=========================== */
+
+/* ボックスモデルを統一 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* デフォルト余白をリセット */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* HTML5要素をブロック化 */
+article, aside, footer, header, nav, section, main {
+  display: block;
+}
+
+/* bodyの基本スタイル */
+html {
+  line-height: 1.15; /* ブラウザデフォルトより少し改善 */
+  -webkit-text-size-adjust: 100%; /* iOS ズーム制御 */
+}
+
+body {
+  min-height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  background: #fff;
+  color: #000;
+}
+
+/* ===========================
+   テキスト関連
+=========================== */
+
+/* 見出しのフォントサイズ調整 */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+/* 強調表示を明確に */
+b, strong {
+  font-weight: bolder;
+}
+
+/* コード系フォント */
+code, kbd, samp, pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* 引用符リセット */
+blockquote, q {
+  quotes: none;
+}
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: '';
+  content: none;
+}
+
+/* ===========================
+   リスト・テーブル
+=========================== */
+
+ul, ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ===========================
+   フォーム要素
+=========================== */
+
+button, input, select, textarea {
+  font: inherit;
+  margin: 0;
+  color: inherit;
+}
+
+button, select {
+  text-transform: none;
+}
+
+/* ボタン系のリセット */
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* フォーカス時のアウトラインを有効化 (アクセシビリティ考慮) */
+:focus {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+
+/* ===========================
+   メディア要素
+=========================== */
+
+img, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===========================
+   リンク
+=========================== */
+
+a {
+  background-color: transparent;
+  color: inherit;
+  text-decoration: none;
+}
